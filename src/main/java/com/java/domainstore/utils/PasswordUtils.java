@@ -27,7 +27,7 @@ public class PasswordUtils {
         }
     }
 
-    // Kiểm tra mật khẩu nhập vào với hash đã lưu
+    // Kiểm tra mật khẩu nhập vào với hash, salt đã lưu trong database
     public static boolean verifyPassword(String inputPassword, String storedHash, String salt) {
         String newHash = hashPassword(inputPassword, salt);
         return newHash.equals(storedHash);
