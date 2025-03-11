@@ -23,9 +23,9 @@ public class testCustomerDAO {
 //        }
 //
 //        // Tìm khách hàng theo ID
-        Customer findCustomer = new Customer("KH006", "", null, "", "", "", "", "", "", Role.user);
-        Customer result = customerDAO.selectById(findCustomer);
-        System.out.println(result != null ? "Tìm thấy khách hàng: " + result : "Không tìm thấy khách hàng");
+//        Customer findCustomer = new Customer("KH006", "", null, "", "", "", "", "", "", Role.user);
+//        Customer result = customerDAO.selectById(findCustomer);
+//        System.out.println(result != null ? "Tìm thấy khách hàng: " + result : "Không tìm thấy khách hàng");
 //
         // Cập nhật thông tin khách hàng
 //        if (result != null) {
