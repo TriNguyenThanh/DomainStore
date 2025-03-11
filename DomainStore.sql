@@ -9,20 +9,42 @@ CREATE TABLE Customer (
     address NVARCHAR(50) NOT NULL,
     email CHAR(30) NOT NULL,
     phone CHAR(12) NOT NULL,
-    password CHAR(16) NOT NULL,
+    hash_code CHAR(64) NOT NULL,
     role ENUM('user', 'admin')  DEFAULT 'user'
 );
-INSERT INTO Customer (id, name, birthday, personal_id, address, email, phone, password, role)
+INSERT INTO Customer (id, name, birthday, personal_id, address, email, phone, hash_code, role)
 VALUES 
-('KH001', 'Nguyễn Thành Trí', '2000-05-07', '082205013763', 'Hà Nội', 'nguyenthanhtri0705@gmail.com', '0912345678', 'pass07052000', 'admin'),
-('KH002', 'Âu Dương Tấn', '1998-12-14', '082265284758', 'Tp. Hồ Chí Minh', 'auduongtan1412@gmail.com', '0987654321', 'pass14121998', 'admin'),
-('KH003', 'Lê Nguyễn Anh Dự', '2002-06-22', '082274651836', 'Đà Nẵng', 'lenguyenanhdu2206@gmail.com', '0909090909', 'pass22062002', 'admin'),
-('KH004', 'Trần Thanh Thúy Vy', '2001-12-12', '082346587634', 'Tiền Giang', 'tranthanhthuyvy1212@gmail.com', '0965645284', 'pass12122001', 'user'),
-('KH005', 'Trịnh Lê Phương Tuấn', '1997-03-03', '082265718564', 'Bến Tre', 'ttpt1997@gmail.com', '0327876533', 'pass03031997', 'user');
+('KH001', 'Nguyễn Thành Trí', '2000-05-07', '082205013763', 'Hà Nội', 'nguyenthanhtri0705@gmail.com', '0912345678', 'CC8n6J9j1UNw2UeZ8Hw2WyNxvVrtF5SehDXYtYRAfsw=', 'admin'),
+('KH002', 'Âu Dương Tấn', '1998-12-14', '082265284758', 'Tp. Hồ Chí Minh', 'auduongtan1412@gmail.com', '0987654321', 'wzV7EhyYKOHiGTbwm710mxW5aaz4xSpf/GjkGreUDmc=', 'admin'),
+('KH003', 'Lê Nguyễn Anh Dự', '2002-06-22', '082274651836', 'Đà Nẵng', 'lenguyenanhdu2206@gmail.com', '0909090909', 'iJtVkPfPZGpsIDHlre5bL/FzRiePU5JZmdzyWETsZx4=', 'admin'),
+('KH004', 'Trần Thanh Thúy Vy', '2001-12-12', '082346587634', 'Tiền Giang', 'tranthanhthuyvy1212@gmail.com', '0965645284', 'nD2cRe/Aoqt+wZ8KcF+O/pfUF/w0uPh6AqNOznJArA4=', 'user'),
+('KH005', 'Trịnh Lê Phương Tuấn', '1997-03-03', '082265718564', 'Bến Tre', 'ttpt1997@gmail.com', '0327876533', 'BfSkgd6PDU4TugwhOzYvO3YFl4p01ZF47if8PGVX0Ds=', 'user');
+
+-- KH001 0912345678 pass07052000
+-- KH002 0987654321 pass14121998
+-- KH003 0909090909 pass22062002
+-- KH004 0965645284 pass12122001
+-- KH005 0327876533 pass03031997
+
+CREATE TABLE Salt (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	cus_id CHAR(10) NOT NULL,
+	hash_code CHAR(64) NOT NULL,
+	
+	FOREIGN KEY (cus_id) REFERENCES customer(id)
+);
+
+INSERT INTO salt (cus_id, hash_code) VALUES
+('KH001', 'snJBPxLfS4JDHmF8MpVCtg=='),
+('KH002', 'p1l10vDMcHHAsIO0c+75Sg=='),
+('KH003', 'rlUQZ2m+dzk93cBoni+IeQ=='),
+('KH004', 'jD1jI3AGgfDCD+csbvnfrA=='),
+('KH005', '7Ar8vmlAXDWUs/CThFKygw==');
 
 CREATE TABLE TopLevelDomain (
-    TLD_text CHAR(10) PRIMARY KEY NOT NULL,
-    price INT UNSIGNED NOT NULL
+	id INT AUTO_INCREMENT PRIMARY KEY,
+   TLD_text CHAR(10) NOT NULL,
+   price INT UNSIGNED NOT NULL
 );
 INSERT INTO TopLevelDomain (TLD_text, price)
 VALUES 
@@ -37,20 +59,20 @@ VALUES
 CREATE TABLE Domain (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     MD_text CHAR(50) NOT NULL,
-    TLD_text CHAR(10) NOT NULL,
+    TLD_id INT NOT NULL,
     domain_status ENUM('available','working', 'outOfDate') DEFAULT 'available',
     domain_date DATE,
     
-    FOREIGN KEY (TLD_text) REFERENCES TopLevelDomain(TLD_text)    
+    FOREIGN KEY (TLD_id) REFERENCES TopLevelDomain(id)    
 );
-INSERT INTO Domain (MD_text, TLD_text, domain_status, domain_date)
+INSERT INTO Domain (MD_text, TLD_id, domain_status, domain_date)
 VALUES 
-('example', '.com', 'working', '2027-03-02'),
-('mydomain', '.vn', 'working', '2026-03-02'),
-('tailieujava', '.site', 'working', '2026-01-01'),
-('khotailieu', '.net', 'working', '2026-05-01'),
-('website', '.site', 'working', '2025-05-01'),
-('baitapjava', '.io.vn', 'available', null);
+('example', 1, 'working', '2027-03-02'),
+('mydomain', 6, 'working', '2026-03-02'),
+('tailieujava', 3, 'working', '2026-01-01'),
+('khotailieu', 2, 'working', '2026-05-01'),
+('website', 3, 'working', '2025-05-01'),
+('baitapjava', 7, 'available', null);
 
 CREATE TABLE Cart (
     cus_id CHAR(10) NOT NULL,
