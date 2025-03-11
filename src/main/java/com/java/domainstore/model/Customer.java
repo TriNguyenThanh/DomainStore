@@ -15,6 +15,7 @@ public class Customer {
     private String email;
     private String phone;
     private String hash_code;
+    private String salt;
     private Role role;
     
     public enum Role{
@@ -23,7 +24,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String id, String name, Date birthday, String personal_id, String address, String email, String phone, String hash_code, Role role) {
+    public Customer(String id, String name, Date birthday, String personal_id, String address, String email, String phone, String hash_code, String salt, Role role) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -32,6 +33,7 @@ public class Customer {
         this.email = email;
         this.phone = phone;
         this.hash_code = hash_code;
+        this.salt = salt;
         this.role = role;
     }
 
@@ -61,10 +63,6 @@ public class Customer {
 
     public String getPhone() {
         return phone;
-    }
-
-    public String getPassword() {
-        return hash_code;
     }
 
     public Role getRole() {
@@ -99,12 +97,24 @@ public class Customer {
         this.phone = phone;
     }
 
-    public void setPassword(String hash_code) {
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getHash_code() {
+        return hash_code;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setHash_code(String hash_code) {
         this.hash_code = hash_code;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     @Override
