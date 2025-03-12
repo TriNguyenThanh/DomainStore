@@ -30,6 +30,8 @@ public class TLDDAO implements DAOInterface<TLDModel>{
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         
         return kq;
@@ -54,6 +56,8 @@ public class TLDDAO implements DAOInterface<TLDModel>{
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         
         return kq;
@@ -74,6 +78,8 @@ public class TLDDAO implements DAOInterface<TLDModel>{
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         
         return kq;
@@ -106,6 +112,8 @@ public class TLDDAO implements DAOInterface<TLDModel>{
             JDBC.closeConnection(c);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return kq;
     }
@@ -132,6 +140,8 @@ public class TLDDAO implements DAOInterface<TLDModel>{
             JDBC.closeConnection(connection);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return kq;
     }
@@ -163,6 +173,8 @@ public class TLDDAO implements DAOInterface<TLDModel>{
             JDBC.closeConnection(c);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return kq;
     }

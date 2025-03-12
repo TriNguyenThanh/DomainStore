@@ -41,6 +41,8 @@ public class DomainDAO implements DAOInterface<DomainModel>{
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         
         return kq;
@@ -71,6 +73,8 @@ public class DomainDAO implements DAOInterface<DomainModel>{
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         
         return kq;
@@ -92,6 +96,8 @@ public class DomainDAO implements DAOInterface<DomainModel>{
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         
         return kq;
@@ -131,6 +137,8 @@ public class DomainDAO implements DAOInterface<DomainModel>{
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return domains;
     }
@@ -163,6 +171,8 @@ public class DomainDAO implements DAOInterface<DomainModel>{
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return domain;
     }
@@ -195,6 +205,8 @@ public class DomainDAO implements DAOInterface<DomainModel>{
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return domain;
     }
@@ -230,6 +242,8 @@ public class DomainDAO implements DAOInterface<DomainModel>{
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return domains;
     }
