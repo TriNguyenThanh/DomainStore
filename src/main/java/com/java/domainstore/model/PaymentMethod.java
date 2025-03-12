@@ -1,7 +1,7 @@
 
 package com.java.domainstore.model;
 
-import com.java.domainstore.enums.PaymentType;
+import com.java.domainstore.model.enums.PaymentType;
 
 public class PaymentMethod {
     private Integer paymentId;

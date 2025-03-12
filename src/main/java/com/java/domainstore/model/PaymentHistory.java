@@ -1,7 +1,7 @@
 
 package com.java.domainstore.model;
 
-import com.java.domainstore.enums.PaymentStatus;
+import com.java.domainstore.model.enums.PaymentStatus;
 import java.time.LocalDate;
 
 public class PaymentHistory {

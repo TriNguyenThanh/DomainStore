@@ -1,7 +1,10 @@
 package com.java.domainstore.AnhDu;
 
 import com.java.domainstore.*;
+import com.java.domainstore.dao.TransactionDAO;
+import com.java.domainstore.model.Transaction;
 import com.java.domainstore.repository.JDBC;
+import java.util.ArrayList;
 
 public class TestApp {
     public static void main(String[] args) {
@@ -33,8 +36,9 @@ public class TestApp {
         // ------------ Transaction -----------
         // Select All
 //        ArrayList<Transaction> transactions = TransactionDAO.getInstance().selectAll();
-//        for(Transaction t : transactions) 
-//            System.out.println(t);
+//        for(Transaction tran : transactions){
+//            System.out.println(tran);
+//        }
          // SelectById
 //        Transaction t =new Transaction();
 //        t.setTransactionId("HD001");

@@ -7,10 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TransactionInfoDAO implements BaseDAO<TransactionInfo>{
+public class TransactionInfoDAO implements DAOInterface<TransactionInfo>{
 
     public static TransactionInfoDAO getInstance(){
         return new TransactionInfoDAO();
@@ -40,7 +39,7 @@ public class TransactionInfoDAO implements BaseDAO<TransactionInfo>{
             // Bước 5: Đóng kết nối
             System.out.println("Thêm dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return rowsAffected;
@@ -95,7 +94,7 @@ public class TransactionInfoDAO implements BaseDAO<TransactionInfo>{
             System.out.println("Xoá dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
             // Bước 5: Đóng kết nối 
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return rowsAffected;
@@ -119,14 +118,13 @@ public class TransactionInfoDAO implements BaseDAO<TransactionInfo>{
             while(rs.next()){
                 // Lấy dữ liệu từ ResultSet
                 String transactionId = rs.getString("transactions_id");
-                String domainId = rs.getString("domain_id");
                 int domainYears = rs.getInt("domain_years");
                 int totalCost = rs.getInt("price");
                 t = new TransactionInfo(transactionId, domainYears, domainYears, totalCost);
             }
             // Bước 5: Đóng kết nối 
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return t;
@@ -159,10 +157,15 @@ public class TransactionInfoDAO implements BaseDAO<TransactionInfo>{
             }
             // Bước 5: Đóng kết nối 
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return listTransactionInfo;
+    }
+
+    @Override
+    public ArrayList<TransactionInfo> selectByCondition(String condition) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

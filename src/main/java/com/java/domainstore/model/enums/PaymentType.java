@@ -1,5 +1,5 @@
 
-package com.java.domainstore.enums;
+package com.java.domainstore.model.enums;
 
 public enum PaymentType {
     VNPay,

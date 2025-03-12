@@ -1,7 +1,7 @@
 
 package com.java.domainstore.dao;
 
-import com.java.domainstore.enums.PaymentStatus;
+import com.java.domainstore.model.enums.PaymentStatus;
 import com.java.domainstore.model.PaymentHistory;
 import com.java.domainstore.repository.JDBC;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class PaymentHistoryDAO implements BaseDAO<PaymentHistory>{
+public class PaymentHistoryDAO implements DAOInterface<PaymentHistory>{
     
     public static PaymentHistoryDAO getInstance(){
         return new PaymentHistoryDAO();
@@ -44,7 +44,7 @@ public class PaymentHistoryDAO implements BaseDAO<PaymentHistory>{
             // Bước 5: Đóng kết nối
             System.out.println("Thêm dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return rowsAffected;
@@ -77,7 +77,7 @@ public class PaymentHistoryDAO implements BaseDAO<PaymentHistory>{
             System.out.println("Cập nhật dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
             // Bước 5: Đóng kết nối 
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return rowsAffected;
@@ -137,7 +137,7 @@ public class PaymentHistoryDAO implements BaseDAO<PaymentHistory>{
             }
             // Bước 5: Đóng kết nối 
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return p;
@@ -173,9 +173,14 @@ public class PaymentHistoryDAO implements BaseDAO<PaymentHistory>{
             }
             // Bước 5: Đóng kết nối 
             JDBC.closeConnection(connection);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return listPaymentHistory;
+    }
+
+    @Override
+    public ArrayList<PaymentHistory> selectByCondition(String condition) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
