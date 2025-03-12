@@ -49,7 +49,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
             return (result1 > 0 && result2 > 0) ? 1 : 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }catch (NullPointerException e) {
+             e.printStackTrace();
+         }
         return 0;
     }
 
@@ -101,7 +103,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
             return (result1 > 0 && result2 > 0) ? 1 : 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }catch (NullPointerException e) {
+             e.printStackTrace();
+         }
         return 0;
     }
 
@@ -126,7 +130,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
             return (result1 > 0 && result2 > 0) ? 1 : 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }catch (NullPointerException e) {
+             e.printStackTrace();
+         }
         return 0;
     }
 
@@ -155,7 +161,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }catch (NullPointerException e) {
+             e.printStackTrace();
+         }
         return null;
     }
 
@@ -184,7 +192,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }catch (NullPointerException e) {
+             e.printStackTrace();
+         }
         return customers;
     }
 
@@ -214,7 +224,9 @@ public class CustomerDAO implements DAOInterface<Customer> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }catch (NullPointerException e) {
+             e.printStackTrace();
+         }
         return customers;
     }
 
