@@ -37,7 +37,7 @@ public class TransactionInfoDAO implements DAOInterface<TransactionInfo>{
             rowsAffected = preparedStatement.executeUpdate();
             
             // Bước 5: Đóng kết nối
-            System.out.println("Thêm dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
+//            System.out.println("Thêm dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
             JDBC.closeConnection(connection);
         } catch (SQLException | NullPointerException e) {
             System.out.println(e.getMessage());

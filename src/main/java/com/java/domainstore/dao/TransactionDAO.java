@@ -2,7 +2,9 @@ package com.java.domainstore.dao;
 
 import com.java.domainstore.model.DomainModel;
 import com.java.domainstore.model.DomainStatusEnum;
+import com.java.domainstore.model.TLDModel;
 import com.java.domainstore.model.Transaction;
+import com.java.domainstore.model.TransactionInfo;
 import com.java.domainstore.model.enums.PaymentStatus;
 import com.java.domainstore.repository.JDBC;
 import java.sql.Connection;
@@ -27,18 +29,29 @@ public class TransactionDAO implements DAOInterface<Transaction> {
             Connection connection = JDBC.getConnection();
 
             // Bước 2: Chuẩn bị câu lệnh để chèn dữ liệu
-            String sql = "INSERT INTO domainstore.transactions(id, cus_id, transaction_date)"
+            String sql = "INSERT INTO transactions(id, cus_id, transaction_date)"
                     + " VALUES(?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
+            
             // Bước 3: Gán giá trị cho các tham số 
             preparedStatement.setString(1, transaction.getTransactionId());
             preparedStatement.setString(2, transaction.getCustomerId());
             preparedStatement.setDate(3, Date.valueOf(transaction.getTransactionDate()));
-
+            
+            
             // Bước 4: Thực thi câu lệnh INSERT và lấy số dòng bị ảnh hưởng
             rowsAffected = preparedStatement.executeUpdate();
-
+            
+            // insert transactin_info
+            for(DomainModel domain : transaction.getListDomain()){
+                TLDModel t = new TLDModel(); t.setId(domain.getTLD_id());
+                TLDModel tld = TLDDAO.getInstance().selectById(t);
+                TransactionInfo tran = new TransactionInfo(
+                        transaction.getTransactionId(), domain.getId(), domain.getYears(), tld.getPrice() * domain.getYears());
+                TransactionInfoDAO.getInstance().insert(tran);
+                rowsAffected++;
+            }
+            
             // Bước 5: Đóng kết nối
             System.out.println("Thêm dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
             JDBC.closeConnection(connection);
@@ -58,14 +71,13 @@ public class TransactionDAO implements DAOInterface<Transaction> {
             // Bước 2: Chuẩn bị câu lệnh để cập nhật dữ liệu
             String sql = "UPDATE domainstore.transactions "
                     + "SET cus_id = ?, transaction_date = ? "
-                    + "WHERE id = ?";
+                    + "WHERE id = ? and customerId = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Bước 3: Gán giá trị cho các tham số 
-            preparedStatement.setString(1, transaction.getCustomerId());
-            preparedStatement.setDate(2, java.sql.Date.valueOf(transaction.getTransactionDate()));
-            preparedStatement.setString(3, transaction.getTransactionId());
-
+            preparedStatement.setDate(1, java.sql.Date.valueOf(transaction.getTransactionDate()));
+            preparedStatement.setString(2, transaction.getTransactionId());
+            preparedStatement.setString(3, transaction.getCustomerId());
             // Bước 4: Thực thi câu lệnh UPDATE và lấy số dòng bị ảnh hưởng
             rowsAffected = preparedStatement.executeUpdate();
             System.out.println("Cập nhật dữ liệu thành công !! Có " + rowsAffected + " thay đổi");
@@ -158,7 +170,6 @@ public class TransactionDAO implements DAOInterface<Transaction> {
     @Override
     public ArrayList<Transaction> selectAll() {
         ArrayList<Transaction> listTransaction = new ArrayList<>();
-        DomainModel domain = null;
         try {
             // Bước 1: Mở kết nối đến database
             Connection connection = JDBC.getConnection();

@@ -4,7 +4,6 @@ package com.java.domainstore.model;
 import com.java.domainstore.model.enums.PaymentStatus;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Transaction {
     private String transactionId; 

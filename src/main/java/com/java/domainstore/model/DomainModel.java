@@ -39,7 +39,7 @@ public class DomainModel {
         this.TLD_text = "";
         this.price = 0;
     }
-
+    
     public int getId() {
         return id;
     }
