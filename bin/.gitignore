@@ -1,0 +1,30 @@
+# build folder
+/target/
+*.class
+
+# log and temp data
+*.log
+*.out
+*.tmp
+
+# Netbeans project setting
+/nbproject/private/
+
+# IDE file
+/.idea/
+/.vscode/
+/.settings/
+
+# Maven dependences
+.m2/
+
+# Maven Wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
+# database and file config
+*.db
+*.sqlite
+*.env
+/nbproject/

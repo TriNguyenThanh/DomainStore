@@ -5,7 +5,7 @@ import com.java.domainstore.dao.DomainDAO;
 import com.java.domainstore.model.DomainModel;
 import com.java.domainstore.model.DomainStatusEnum;
 import com.java.domainstore.model.TLDModel;
-import java.sql.Date;
+import com.java.domainstore.ui.view.swing.fLogin;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,8 +66,13 @@ public class TestApp {
                 break;
         }
     }
+    public static void UITest() {
+        fLogin.start();
+    }
+    
     public static void main(String[] args) {
 //        TLDDAOTest(5);
-        DomainDAOTest(6);
+//        DomainDAOTest(6);
+        UITest();
     }
 }
