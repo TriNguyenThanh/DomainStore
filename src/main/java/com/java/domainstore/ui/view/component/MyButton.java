@@ -17,7 +17,9 @@ public class MyButton extends JButton {
         
         radius = 15;
         defaultColor = Color.WHITE;
-        selectedColor = Color.RED;
+        selectedColor = Color.decode("#fa4040");
+        
+        setBackground(defaultColor);
 
         // bắt sự kiện chuột
         addMouseListener(new MouseAdapter() {
@@ -25,8 +27,6 @@ public class MyButton extends JButton {
             public void mouseClicked(MouseEvent e) {
                 setBackground(Color.GREEN); // Đổi màu nền khi click
             }
-
-
             // hiệu ứng hover
             @Override
             public void mouseEntered(MouseEvent e) {

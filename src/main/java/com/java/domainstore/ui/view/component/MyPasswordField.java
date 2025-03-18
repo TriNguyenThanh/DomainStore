@@ -7,21 +7,21 @@ import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
 
-public class MyPasswordField extends JPasswordField{
+public class MyPasswordField extends JPasswordField {
+
     private int radius;
-    private char defaultChar;
-    
+    private final char defaultChar;
+
     public MyPasswordField() {
-        super();
-        
-        setText("password");
+        super("pass");
         radius = 15;
-        defaultChar = getEchoChar();
+        defaultChar = '•';
         setOpaque(false); // Loại bỏ nền mặc định
         setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Tạo padding bên trong
         setFont(new Font("Tahoma", Font.PLAIN, 18));
+        setEchoChar(defaultChar);
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -35,8 +35,10 @@ public class MyPasswordField extends JPasswordField{
 
     @Override
     protected void paintBorder(Graphics g) {
-        // Không vẽ viền mặc định
+        g.setColor(getBackground());
+        g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, radius, radius);
     }
+
     public int getRadius() {
         return radius;
     }
@@ -44,11 +46,11 @@ public class MyPasswordField extends JPasswordField{
     public void setRadius(int radius) {
         this.radius = radius;
     }
-    
+
     public void show() {
         setEchoChar((char) 0);
     }
-    
+
     public void hide() {
         setEchoChar(defaultChar);
     }
