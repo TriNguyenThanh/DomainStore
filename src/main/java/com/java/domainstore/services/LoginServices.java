@@ -18,14 +18,12 @@ public class LoginServices {
         CustomerModel customer = customerDAO.selectByPhone(username);
 
         if (customer == null) {
-            System.out.println("Không tìm thấy tài khoản!");
             return false;
         }
 
         // Lấy salt từ database
         String salt = customer.getSalt();
         if (salt == null) {
-            System.out.println("Không tìm thấy salt!");
             return false;
         }
 
@@ -34,14 +32,9 @@ public class LoginServices {
 
         // Kiểm tra với hash_code trong database
         if (hashedPassword.equals(customer.getHash_code())) {
-            System.out.println("Đăng nhập thành công!");
             return true;
         }
-
-        System.out.println("Sai mật khẩu!");
         return false;
-//        if (username.equals("thanhtri") && password.equals("123456")) return true;
-//        
-//        return false;
+
     }
 }

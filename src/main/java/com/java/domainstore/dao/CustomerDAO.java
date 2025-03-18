@@ -17,7 +17,6 @@ public class CustomerDAO implements DAOInterface<CustomerModel> {
         return new CustomerDAO();
     }
 
-    // ✅ Hàm tự động sinh ID mới dạng KH001, KH002, ...
     private String generateCustomerId() {
         String sql = "SELECT id FROM Customer ORDER BY id DESC LIMIT 1";
         try (Connection con = JDBC.getConnection();
@@ -25,16 +24,16 @@ public class CustomerDAO implements DAOInterface<CustomerModel> {
              ResultSet rs = pst.executeQuery()) {
 
             if (rs.next()) {
-                String lastId = rs.getString("id"); // Lấy ID cuối cùng (VD: KH009)
-                int number = Integer.parseInt(lastId.substring(2)); // Lấy số 009
-                return "KH" + String.format("%03d", number + 1); // Tạo ID mới KH010
+                String lastId = rs.getString("id"); // 
+                int number = Integer.parseInt(lastId.substring(2));
+                return "KH" + String.format("%03d", number + 1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
              e.printStackTrace();
          }
-        return "KH001"; // Nếu database chưa có khách nào, bắt đầu từ KH001
+        return "KH001"; 
     }
 
     @Override
@@ -44,7 +43,7 @@ public int insert(CustomerModel customer) {
 
         //  Tạo ID tự động
         String newId = generateCustomerId();
-        customer.setId(newId); //  Cập nhật ID vào đối tượng
+        customer.setId(newId); 
 
         //  Debug kiểm tra ID sau khi gán
         System.out.println(" ID sau khi insert: " + customer.getId());
@@ -110,7 +109,7 @@ public int insert(CustomerModel customer) {
             pstCustomer.setString(4, customer.getAddress());
             pstCustomer.setString(5, customer.getEmail());
             pstCustomer.setString(6, customer.getPhone());
-            pstCustomer.setString(7, newHashCode);  // Cập nhật hash_code trong Customer
+            pstCustomer.setString(7, newHashCode);  
             pstCustomer.setString(8, customer.getRole().name());
             pstCustomer.setString(9, customer.getId());
             int result1 = pstCustomer.executeUpdate();
@@ -118,7 +117,7 @@ public int insert(CustomerModel customer) {
             // Cập nhật bảng Salt
             String sqlUpdateSalt = "UPDATE Salt SET hash_code=? WHERE cus_id=?";
             PreparedStatement pstUpdateSalt = con.prepareStatement(sqlUpdateSalt);
-            pstUpdateSalt.setString(1, newHashCode);  // Cập nhật hash_code trong Salt
+            pstUpdateSalt.setString(1, newHashCode); 
             pstUpdateSalt.setString(2, customer.getId());
             int result2 = pstUpdateSalt.executeUpdate();
 
@@ -137,36 +136,30 @@ public int insert(CustomerModel customer) {
         try {
             Connection con = JDBC.getConnection();
 
-            // ✅ Debug: Kiểm tra ID trước khi xóa
-            System.out.println("🔍 Đang xóa khách hàng có ID: " + customer.getId());
-
-            // ✅ Xóa giao dịch trong bảng Transactions trước
+            // Xóa giao dịch trong bảng Transactions trước
             String sqlTransactions = "DELETE FROM Transactions WHERE cus_id=?";
             PreparedStatement pstTransactions = con.prepareStatement(sqlTransactions);
             pstTransactions.setString(1, customer.getId());
             int transactionsDeleted = pstTransactions.executeUpdate();
-            System.out.println("🗑 Xóa " + transactionsDeleted + " giao dịch trong Transactions.");
 
-            // ✅ Xóa trong bảng Salt trước để tránh lỗi khóa ngoại
+            // Xóa trong bảng Salt trước để tránh lỗi khóa ngoại
             String sqlSalt = "DELETE FROM Salt WHERE cus_id=?";
             PreparedStatement pstSalt = con.prepareStatement(sqlSalt);
             pstSalt.setString(1, customer.getId());
             int saltDeleted = pstSalt.executeUpdate();
-            System.out.println("🗑 Xóa " + saltDeleted + " bản ghi trong Salt.");
 
-            // ✅ Xóa trong bảng Customer
+            //  Xóa trong bảng Customer
             String sqlCustomer = "DELETE FROM Customer WHERE id=?";
             PreparedStatement pstCustomer = con.prepareStatement(sqlCustomer);
             pstCustomer.setString(1, customer.getId());
             int customerDeleted = pstCustomer.executeUpdate();
-            System.out.println("🗑 Xóa " + customerDeleted + " bản ghi trong Customer.");
 
-            // ✅ Kiểm tra kết quả xóa
-            if (customerDeleted > 0) {
-                System.out.println("✔ Khách hàng có ID " + customer.getId() + " đã bị xóa!");
-            } else {
-                System.out.println("❌ Không tìm thấy khách hàng để xóa!");
-            }
+            //  Kiểm tra kết quả xóa
+//            if (customerDeleted > 0) {
+//                System.out.println(" Khách hàng có ID " + customer.getId() + " đã bị xóa!");
+//            } else {
+//                System.out.println(" Không tìm thấy khách hàng để xóa!");
+//            }
 
             return customerDeleted;
         } catch (SQLException e) {
