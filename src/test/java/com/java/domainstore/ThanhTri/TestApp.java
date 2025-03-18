@@ -6,12 +6,15 @@ import com.java.domainstore.model.DomainModel;
 import com.java.domainstore.model.DomainStatusEnum;
 import com.java.domainstore.model.TLDModel;
 import com.java.domainstore.ui.view.swing.fLogin;
+import com.java.domainstore.ui.view.swing.fMain;
+import com.java.domainstore.ui.view.swing.fRegister;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestApp {
+
     public static void TLDDAOTest(int i) {
-        switch(i){
+        switch (i) {
             case 1:
                 int kq = TLDDAO.getInstance().insert(new TLDModel(8, ".dev", 30000));
                 System.out.printf("Insert %d row(s)", kq);
@@ -26,7 +29,7 @@ public class TestApp {
                 break;
             case 4:
                 List<TLDModel> tlds = TLDDAO.getInstance().selectAll();
-                for(TLDModel tld : tlds){
+                for (TLDModel tld : tlds) {
                     System.out.printf("%02d. %10s - %d%n", tld.getId(), tld.getName(), tld.getPrice());
                 }
                 break;
@@ -36,8 +39,9 @@ public class TestApp {
                 break;
         }
     }
+
     public static void DomainDAOTest(int i) {
-        switch(i) {
+        switch (i) {
             case 1:
                 int kq = DomainDAO.getInstance().insert(new DomainModel(0, "helloworld", 1, DomainStatusEnum.AVAILABLE, 2));
                 System.out.printf("Insert %d row", kq);
@@ -52,7 +56,7 @@ public class TestApp {
                 break;
             case 4:
                 ArrayList<DomainModel> domains = DomainDAO.getInstance().selectAll();
-                for (DomainModel domain : domains){
+                for (DomainModel domain : domains) {
                     System.out.println(domain);
                 }
                 break;
@@ -66,10 +70,13 @@ public class TestApp {
                 break;
         }
     }
+
     public static void UITest() {
-        fLogin.start();
+                fLogin.start();
+        //        fRegister.start();
+//        fMain.start();
     }
-    
+
     public static void main(String[] args) {
 //        TLDDAOTest(5);
 //        DomainDAOTest(6);
