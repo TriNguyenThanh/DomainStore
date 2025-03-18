@@ -271,5 +271,36 @@ public int insert(CustomerModel customer) {
          }
         return customers;
     }
+    //lay so dien thoai
+    public CustomerModel selectByPhone(String phone) {
+        try {
+            Connection con = JDBC.getConnection();
+            String sql = "SELECT c.*, s.hash_code AS salt FROM Customer c LEFT JOIN Salt s ON c.id = s.cus_id WHERE c.phone=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, phone);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                return new CustomerModel(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getDate("birthday"),
+                        rs.getString("personal_id"),
+                        rs.getString("address"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("hash_code"), 
+                        rs.getString("salt"),       
+                        Role.valueOf(rs.getString("role"))
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }catch (NullPointerException e) {
+             e.printStackTrace();
+         }
+        return null;
+    }
+
 
 }

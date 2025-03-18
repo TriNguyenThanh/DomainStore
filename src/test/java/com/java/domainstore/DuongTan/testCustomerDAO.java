@@ -1,12 +1,20 @@
 package com.java.domainstore.DuongTan;
 
+import static com.java.domainstore.ThanhTri.TestApp.UITest;
 import com.java.domainstore.dao.CustomerDAO;
 import com.java.domainstore.model.CustomerModel;
 import com.java.domainstore.model.enums.Role;
+import com.java.domainstore.ui.view.swing.fLogin;
+import com.java.domainstore.ui.view.swing.fRegister;
 import java.sql.Date;
 import java.util.List;
 
 public class testCustomerDAO {
+    public static void UITest() {
+        fLogin.start();
+//      fRegister.start();
+//      fMain.start();
+    }
     public static void main(String[] args) {
         CustomerDAO customerDAO = CustomerDAO.getInstance();
 
@@ -51,5 +59,8 @@ public class testCustomerDAO {
 //               System.out.println("thanh cong");
 //        else
 //            System.out.println("that bai");
+
+        //test UI
+        UITest();
     }
 }
