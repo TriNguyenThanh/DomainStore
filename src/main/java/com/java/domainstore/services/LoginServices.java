@@ -5,26 +5,26 @@ import com.java.domainstore.model.CustomerModel;
 import com.java.domainstore.utils.PasswordUtils;
 
 public class LoginServices {
-    public boolean authentication(String username, String password) {
+    public String authentication(String username, String password) {
         
         // b1: tìm trong database xem có user nào có username này hay không. Username là số điện thoại
-        // nếu có thì qua b2, không thì return
+        // nếu có thì qua b2, không thì return ""
         
         // b2: lấy mã salt trong database rồi băm password ra hash code rồi so sánh với hash code của user
-        // nếu đúng thì return true
-        // Tìm khách hàng theo username (số điện thoại)
+        // nếu đúng thì return ID
+        
         // Tìm khách hàng theo username (số điện thoại)
         CustomerDAO customerDAO = new CustomerDAO();
         CustomerModel customer = customerDAO.selectByPhone(username);
 
         if (customer == null) {
-            return false;
+            return "";
         }
 
         // Lấy salt từ database
         String salt = customer.getSalt();
-        if (salt == null) {
-            return false;
+        if (salt == null) { // nên thay bằng salt.isBlank()
+            return "";
         }
 
         // Hash mật khẩu nhập vào với salt lấy từ database
@@ -32,9 +32,9 @@ public class LoginServices {
 
         // Kiểm tra với hash_code trong database
         if (hashedPassword.equals(customer.getHash_code())) {
-            return true;
+            return customer.getId();
         }
-        return false;
+        return "";
 
     }
 }
