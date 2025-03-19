@@ -33,6 +33,7 @@ public class fMain extends javax.swing.JFrame {
 
         pnBG1 = new com.java.domainstore.ui.view.container.pnBG();
         btExit = new com.java.domainstore.ui.view.component.MyButton();
+        pnSideBar1 = new com.java.domainstore.ui.view.container.pnSideBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -45,12 +46,25 @@ public class fMain extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout pnSideBar1Layout = new javax.swing.GroupLayout(pnSideBar1);
+        pnSideBar1.setLayout(pnSideBar1Layout);
+        pnSideBar1Layout.setHorizontalGroup(
+            pnSideBar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        pnSideBar1Layout.setVerticalGroup(
+            pnSideBar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnBG1Layout = new javax.swing.GroupLayout(pnBG1);
         pnBG1.setLayout(pnBG1Layout);
         pnBG1Layout.setHorizontalGroup(
             pnBG1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnBG1Layout.createSequentialGroup()
-                .addContainerGap(1134, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(pnSideBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 828, Short.MAX_VALUE)
                 .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -58,8 +72,12 @@ public class fMain extends javax.swing.JFrame {
             pnBG1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnBG1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(764, Short.MAX_VALUE))
+                .addGroup(pnBG1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnBG1Layout.createSequentialGroup()
+                        .addComponent(btExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 758, Short.MAX_VALUE))
+                    .addComponent(pnSideBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,5 +150,6 @@ public class fMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.java.domainstore.ui.view.component.MyButton btExit;
     private com.java.domainstore.ui.view.container.pnBG pnBG1;
+    private com.java.domainstore.ui.view.container.pnSideBar pnSideBar1;
     // End of variables declaration//GEN-END:variables
 }

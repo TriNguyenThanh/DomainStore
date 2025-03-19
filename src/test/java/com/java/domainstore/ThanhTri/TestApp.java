@@ -72,9 +72,9 @@ public class TestApp {
     }
 
     public static void UITest() {
-                fLogin.start();
-        //        fRegister.start();
-//        fMain.start();
+//        fLogin.start();
+//        fRegister.start();
+        fMain.start();
     }
 
     public static void main(String[] args) {
