@@ -9,7 +9,7 @@ public class JDBC {
     public static Connection getConnection() {
         Connection c = null;
         try {
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             
             String url = "jdbc:mysql://localhost:3306/domainstore";
             String username = "root";
